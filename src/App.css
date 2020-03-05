@@ -1,38 +1,709 @@
+html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}button,html [type=button],[type=reset],[type=submit]{-webkit-appearance:button}button::-moz-focus-inner,[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner{border-style:none;padding:0}button:-moz-focusring,[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}template{display:none}[hidden]{display:none}
+
+.clearfix:after {visibility: hidden; display: block; font-size: 0; content: ''; clear: both; height: 0; }
+
+html { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
+
+*, *:before, *:after {box-sizing: inherit}
+
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; white-space: nowrap; clip-path: inset(100%); clip: rect(0 0 0 0); overflow: hidden;}
+
+/* Load fonts */
+@font-face {
+  font-family: 'compasspro';
+  src: url('./assets/fonts/compasspro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'equipmentpro';
+  src: url('./assets/fonts/equipmentpro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Initialize variables */
+:root {
+  --colPrimary: #6d0d0d;
+  --colSecondary: #77360e;
+  --colTertiary: #637224;
+  --colAccentLight: #ffba00;
+  --colAccentDark: #e88f00;
+  --colOffWhite: #ffedbc;
+  --colOffBlack: #140206;
+  --fontHeader: 'compasspro', serif;
+  --fontBody: 'equipmentpro', sans-serif;
+}
+
+/* General Styles */
+
+html {
+  font-size: 62.5%;
+}
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  height: 100vh;
+  scrollbar-color: var(--colAccentDark) var(--colSecondary);
+  font-family: var(--fontBody);
+  background-image: url('./assets/medievaltrade.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  letter-spacing: 0.2vmax;
+  cursor: url('./assets/cursors/default.png'), auto;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body::-webkit-scrollbar {
+  width: 11px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body::-webkit-scrollbar-track {
+  background: var(--colSecondary);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--colAccentDark) ;
+  border: 3px solid var(--colSecondary);
+}
+
+header {
+  height: 10vh;
+  background-color: var(--colPrimary);
+}
+
+main {
+  height: 70vh;
+  padding: 1vmax 0;
+}
+
+footer {
+  height: 20vh;
+  background-color: var(--colPrimary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--colOffWhite);
+  text-shadow: 1px 1px var(--colOffBlack);
+  font-family: var(--fontHeader);
+}
+
+h1 {
+  font-size: 6vmax;
+}
+
+h2 {
+  font-size: 4vmax;
+}
+
+h3 {
+  font-size: 3vmax;
+}
+
+h4 {
+  font-size: 2vmax;
+}
+
+p,
+label,
+input,
+select,
+option {
+  font-size: 1.5vmax;
+  font-family: var(--fontBody);
+  color: var(--colOffBlack);
+}
+
+p,
+label {
+  color: var(--colOffWhite);
+}
+
+button {
+  border: 4px ridge var(--colSecondary);
+  background-color: var(--colAccentDark);
+  color: var(--colOffBlack);
+  font-family: var(--fontBody);
+  font-size: 1.75vmax;
+  padding: 0.5vmax 2vmax;
+  transition: all 0.3s;
+}
+
+button,
+.inventoryItem {
+  cursor: url('./assets/cursors/point.png'), auto;
+}
+
+button:hover,
+button:focus {
+  color: var(--colPrimary);
+  background-color: var(--colAccentLight);
+  border-color: var(--colOffWhite);
+}
+
+button:active {
+  background-color: var(--colSecondary);
+  border-color: var(--colOffBlack);
+}
+
+button:disabled {
+  color: var(--colOffBlack);
+  background-color: var(--colSecondary);
+  border-color: var(--colSecondary);
+}
+
+input {
+  padding: 0.5vmax;
+  background-color: var(--colOffWhite);
+  border: 4px ridge var(--colSecondary);
+  transition: all 0.3s;
+  font-size: 2vmax;
+  cursor: url('./assets/cursors/select.png'), auto;
+}
+
+input:focus {
+  border-color: var(--colAccentDark);
+}
+
+select {
+  font-family: var(--fontBody);
+  background-color: var(--colOffWhite);
+  border: 4px ridge var(--colPrimary);
+  transition: all 0.3s;
+}
+
+select:focus {
+  border-color: var(--colAccentDark);
+}
+
+.wrapper {
+  max-width: 1280px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Game header styles */
+.gameHeader {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gameHeader h2 {
+  text-align: left;
+}
+
+.gameHeader > *:first-child,
+.gameHeader .headerButtons {
+  flex-basis: 40%;
+}
+
+.gameHeader .darkContainer {
+  flex-basis: 20%;
+}
+
+.headerButtons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Game main styles */
+.gameMain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Game footer styles */
+.gameFooter {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gameFooter > * {
+  width: 45%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.travelButton {
+  font-size: 3.5vmax;
+}
+
+.moneySymbol {
+  font-family: var(--fontHeader);
+}
+
+/* Start screen styles */
+.startScreen {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.startScreen h1 {
+  color: var(--colAccentLight);
+  text-shadow: 2px 2px 2px var(--colOffBlack), -2px -2px 2px var(--colOffBlack), -2px 2px 2px var(--colOffBlack), 2px -2px 2px var(--colOffBlack);
+}
+
+.startScreen .wrapper {
+  width: 60%;
+  padding: 10vmax 0;
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.choices button {
+  margin: 0 1vmax;
+}
+
+.mainMenu .choices,
+.upgradeMenu .choices {
+  flex-direction: column;
+}
+
+.mainMenu .choices button,
+.upgradeMenu .choices button {
+  margin: 1vmax 0;
+}
+
+.startNewGame,
+.loadGame {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.newGameForm,
+.countryChoiceForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.newGameForm label,
+.newGameForm button {
+  margin: 1vmax 0;
+}
+
+.newGameForm p {
+  margin: 0;
+  color: var(--colAccentLight);
+}
+
+.countryChoiceForm label{
+  font-size: 2.5vmax;
+}
+
+.countryChoiceForm option,
+.countryChoiceForm select {
+  font-size: 2.75vmax;
+  padding: 0 1vmax;
+  margin: 1vmax 0;
+}
+
+.countryChoiceForm button {
+  margin: 1.5vmax 0;
+}
+
+/* Popup styles */
+.popup {
+  width: 75vw;
+  height: 75vh;
+  position: absolute;
+  top: 12.5%;
+  left: 12.5%;
+  z-index: 10;
+  border: 4px outset var(--colAccentDark);
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: var(--colPrimary);
+  padding: 2vmax;
 }
 
-.App-link {
-  color: #61dafb;
+.popup form button {
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.popup .countryChoiceForm button {
+  width: inherit;
+}
+
+.travelScreen,
+.transactionScreen {
+  justify-content: space-evenly;
+}
+
+.travelScreen {
+  width: 75vw;
+  height: 50vh;
+  top: 25%;
+  left: 12.5%;
+  padding: 1vmax;
+}
+
+.travelScreen > button {
+  width: 40%;
+}
+
+.travelDestinations {
+  overflow: auto;
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+
+.transactionScreen form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.transactionScreen form button {
+  margin: 1vmax 0;
+}
+
+.encounter .choices,
+.debtCollector .choices {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.encounter p,
+.debtCollector p {
+  font-size: 2vmax;
+}
+
+.marketEvent button {
+  margin: 2vmax 0;
+}
+
+.ornateContainer {
+  border: 8px ridge var(--colAccentDark);
+  background-color: var(--colPrimary);
+  padding: 1vmax;
+}
+
+.startScreen .ornateContainer {
+  width: 50vw;
+  height: 60vh;
+  padding: 2.5vmax;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.startScreen .ornateContainer > button {
+  margin: 1vmax 0;
+}
+
+.startNewGame .ornateContainer {
+  width: 60vw;
+  height: 90vh;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.startScreen .howToPlay {
+  width: 75vw;
+  height: 90vh;
+}
+
+.instructions {
+  overflow: auto;
+}
+
+.startScreen .howToPlay button {
+  margin: 0 auto;
+}
+
+.startNewGame .ornateContainer p {
+  margin: 0;
+}
+
+.startNewGame .ornateContainer > button {
+  margin: 1vmax 0;
+}
+
+.ornateContainer.login {
+  height: 80vh;
+}
+
+.ornateContainer.login p {
+  margin: 0;
+  color: var(--colAccentLight);
+}
+
+.popup .ornateContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.popup .ornateContainer form {
+  height: 100%;
+}
+
+/* Inventory styles */
+
+.inventory {
+  background-color: var(--colSecondary);
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.inventory:first-of-type {
+  direction: rtl;
+}
+
+.inventory:first-of-type > * {
+  direction: ltr;
+}
+
+.inventoryItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: var(--colOffWhite);
+  border: 4px outset var(--colAccentDark);
+  margin: 4px 0;
+  background-color: var(--colPrimary);
+  transition: all 0.3s;
+}
+
+.inventoryItem:hover,
+.inventoryItem:focus {
+  background-color: var(--colOffBlack);
+  border-color: var(--colAccentLight);
+}
+
+.inventoryItem:hover p,
+.inventoryItem:focus p {
+  color: var(--colAccentLight);
+}
+
+.inventoryItem > * {
+  flex-basis: calc(100% / 3);
+}
+
+/* Section specific styles */
+.darkContainer {
+  background-color: var(--colOffBlack);
+  border: 4px ridge var(--colAccentDark);
+  padding: 0 0.75vmin;
+}
+
+.darkContainer h2,
+.darkContainer h3 {
+  color: var(--colAccentLight);
+}
+
+.bankBalance {
+  margin: 1vmax 0;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bank .choices {
+  margin: 1vmax 0;
+}
+
+.depositScreen form,
+.withdrawScreen form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.depositScreen form > *,
+.withdrawScreen form > * {
+  margin: 1vmax 0;
+}
+
+.depositScreen form button,
+.withdrawScreen form button {
+  width: inherit;
+}
+
+.ledgerItemList {
+  width: 100%;
+  height: 100%;
+  padding: 1vmax;
+  overflow: auto;
+}
+
+.ledgerItem > * {
+  margin: 1vmax 0;
+}
+
+/* Media queries */
+
+@media (max-width: 800px) {
+
+  .wrapper {
+    width: 95%;
   }
-  to {
-    transform: rotate(360deg);
+
+  h2 {
+    font-size: 5vmax;
   }
+
+  h4 {
+    font-size: 3vmax;
+  }
+
+  button {
+    font-size: 2.5vmax;
+  }
+
+  p,
+  label,
+  input,
+  select,
+  option {
+    font-size: 2.5vmax;
+  }
+
+  .gameMain {
+    flex-direction: column;
+  }
+
+  .gameFooter {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .gameFooter > * {
+    width: 100%;
+    height: 40%;
+  }
+
+  .travelButton {
+    font-size: 5vmax;
+  }
+
+  .travelDestinations {
+    height: 100%;
+  }
+
+  .darkContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .startScreen .ornateContainer {
+    width: 90vw;
+  }
+
+  .startScreen h3 {
+    font-size: 3.5vmax;
+  }
+
+  .choices {
+    flex-direction: column;
+  }
+
+  .choices button {
+    margin: 1vmax;
+    font-size: 3vmax;
+  }
+
+  .transactionScreen {
+    height: 60vh;
+    top: 20%;
+  }
+
+  .transactionScreen button {
+    font-size: 3vmax;
+  }
+
+  .popup {
+    width: 90%;
+    left: 5%;
+  }
+
+  .popup h3 {
+    font-size: 4vmax;
+  }
+
+  .popup button {
+    padding: 1vmax 4.5vmax;
+  }
+
+  .travelScreen,
+  .encounter {
+    top: 12.5%;
+    height: 75vh;
+  }
+
+  .marketEvent {
+    top: 20%;
+    height: 60vh;
+  }
+
+  .travelScreen button {
+    padding: 0.5vmax 2vmax;
+  }
+
+  .encounter p {
+    font-size: 3vmax;
+  }
+
+}
+
+@media (max-width: 400px) {
+  p,
+  button,
+  input,
+  label {
+    font-size: 3vmax;
+  }
+
+  .travelDestinations button {
+    font-size: 2.5vmax;
+  }
+
 }
