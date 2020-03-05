@@ -47,7 +47,7 @@ class MainMenu extends Component {
         });
 
         if (!bankFound) {
-            const unRoundedInterestRate = getRandomFloatInRange(0.001, 0.025);
+            const unRoundedInterestRate = getRandomFloatInRange(0.001, 0.015);
             interestRate = Math.round((unRoundedInterestRate + Number.EPSILON) * 1000) / 1000;
             maxLoanAmount = getRandomIntInRange(1000, 10000);
             player.banks.push({
