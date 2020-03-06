@@ -23,7 +23,8 @@ class MainMenu extends Component {
             interestRate: 0,
             maxLoanAmount: 0,
             lastVisit: 0,
-            properties: []
+            properties: [],
+            propertyScreen: false
         }
     }
 
@@ -104,7 +105,8 @@ class MainMenu extends Component {
             upgradeScreen: false,
             bankScreen: false,
             depositScreen: false,
-            withdrawScreen: false
+            withdrawScreen: false,
+            propertyScreen: false
         },
             this.props.close
         );
@@ -164,6 +166,12 @@ class MainMenu extends Component {
     toggleLedgerScreen = () => {
         this.setState({
             ledgerScreen: !this.state.ledgerScreen
+        });
+    }
+
+    togglePropertyScreen = () => {
+        this.setState({
+            propertyScreen: !this.state.propertyScreen
         });
     }
 
@@ -257,6 +265,7 @@ class MainMenu extends Component {
                     <div className="choices">
                         <button onClick={ this.toggleUpgradeScreen }>Manage Caravan</button>
                         <button onClick={ this.toggleBankScreen }>Local Bank</button>
+                        <button onClick={ this.togglePropertyScreen }>Local Property</button>
                         <button onClick={ this.toggleLedgerScreen }>Ledger</button>
                         <button onClick={ this.confirmNewGame }>New Game</button>
                         <button onClick={ this.confirmQuit }>Quit Game</button>
@@ -372,6 +381,13 @@ class MainMenu extends Component {
                             }
                         </div>
                         <button onClick={ this.toggleLedgerScreen }>Close</button>
+                    </div>
+                    : null
+                }
+                {
+                    this.state.propertyScreen ?
+                    <div className="popup propertyScreen">
+                        <button onClick={ this.togglePropertyScreen }>Close</button>
                     </div>
                     : null
                 }

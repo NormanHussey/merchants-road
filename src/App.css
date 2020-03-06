@@ -290,6 +290,12 @@ select:focus {
   flex-direction: column;
 }
 
+.mainMenu .choices {
+  flex-wrap: wrap;
+  width: 100%;
+  height: 75%;
+}
+
 .mainMenu .choices button,
 .upgradeMenu .choices button {
   margin: 1vmax 0;
@@ -649,6 +655,12 @@ select:focus {
   .choices button {
     margin: 1vmax;
     font-size: 3vmax;
+  }
+
+  .mainMenu .choices {
+    flex-wrap: none;
+    width: inherit;
+    height: inherit;
   }
 
   .transactionScreen {
