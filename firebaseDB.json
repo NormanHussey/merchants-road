@@ -38,6 +38,26 @@
         ]
     },
 
+    "properties": [
+        {
+            "town": "York",
+            "name": "Wheat Farm",
+            "item": "Wheat",
+            "production": 10,
+            "qty": 0,
+            "cost": 250000
+        },
+        {
+            "town": "Canterbury",
+            "name": "Fishery",
+            "item": "Fish",
+            "production": 10,
+            "qty": 0,
+            "cost": 250000
+        }
+
+    ],
+
     "items": [
         {
             "type": "Wheat",
@@ -203,6 +223,9 @@
             "debts": [{
                 "name": "empty",
                 "debtAmount": 0
+            }],
+            "properties": [{
+                "town": "empty"
             }]
         }
     }

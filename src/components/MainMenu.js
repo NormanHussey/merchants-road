@@ -22,12 +22,14 @@ class MainMenu extends Component {
             accountBalance: 0,
             interestRate: 0,
             maxLoanAmount: 0,
-            lastVisit: 0
+            lastVisit: 0,
+            properties: []
         }
     }
 
     componentDidMount() {
         const player = this.props.player;
+        const properties = this.props.properties;
         let bankFound = false;
         let accountBalance = 0;
         let interestRate = 0;
@@ -63,6 +65,7 @@ class MainMenu extends Component {
         this.props.updatePlayer(player);
 
         this.setState({
+            properties: properties,
             bankIndex: bankFound,
             accountBalance: accountBalance,
             interestRate: interestRate,

@@ -30,6 +30,7 @@ class App extends Component {
       location: {},
       country: {},
       items: [],
+      properties: [],
       buying: false,
       selling: false,
       selectedItem: null,
@@ -53,11 +54,13 @@ class App extends Component {
       const allPlayers = db.players;
       const countries = db.countries;
       const items = db.items;
+      const properties = db.properties;
 
       this.setState({
         allPlayers: allPlayers,
         countries: countries,
-        items: items
+        items: items,
+        properties: properties
       });
     });
 
@@ -84,6 +87,9 @@ class App extends Component {
       debts: [{
         name: "empty",
         debtAmount: 0
+      }],
+      properties: [{
+        town: "empty"
       }]
     };
 
@@ -161,7 +167,7 @@ class App extends Component {
 
     // Randomly assign prices to each item relative to its base price
     for (let item of newInventory) {
-      const priceModifier = getRandomFloatInRange(0.5, 1.5);
+      const priceModifier = getRandomFloatInRange(0.75, 1.25);
       item.price = Math.round(item.basePrice * priceModifier);
       const qty = getRandomIntInRange(25, 500);
       item.qty = qty;
@@ -177,7 +183,7 @@ class App extends Component {
       // Choose which type of event will occur and set a random price according to that event
       if (probability(0.5)) {
         marketEvent.type = 'overabundance';
-        const priceModifier = getRandomFloatInRange(0.1, 0.3);
+        const priceModifier = getRandomFloatInRange(0.25, 0.5);
         newInventory[itemIndex].price = Math.round(marketEvent.item.basePrice * priceModifier);
         if (newInventory[itemIndex].price < 1) {
           newInventory[itemIndex].price = 1;
@@ -186,7 +192,7 @@ class App extends Component {
         newInventory[itemIndex].qty = qty;
       } else {
         marketEvent.type = 'scarcity';
-        const priceModifier = getRandomFloatInRange(2.5, 5);
+        const priceModifier = getRandomFloatInRange(1.75, 2.25);
         newInventory[itemIndex].price = Math.round(marketEvent.item.basePrice * priceModifier);
         const qty = getRandomIntInRange(1, 20);
         newInventory[itemIndex].qty = qty;
@@ -508,7 +514,7 @@ class App extends Component {
               <div className="headerButtons">
                 <button onClick={ this.toggleMenuOpen }>Menu</button>
               </div>
-              { this.state.menuOpen ? <MainMenu updatePlayer={this.updatePlayer} player={this.state.player} beginGame={this.startingNewGame} countries={Object.keys(this.state.countries)} quit={ this.quitting } close={ this.toggleMenuOpen } /> : null }
+              { this.state.menuOpen ? <MainMenu properties={this.state.properties} updatePlayer={this.updatePlayer} player={this.state.player} beginGame={this.startingNewGame} countries={Object.keys(this.state.countries)} quit={ this.quitting } close={ this.toggleMenuOpen } /> : null }
             </div>
           </header>
           <main>
