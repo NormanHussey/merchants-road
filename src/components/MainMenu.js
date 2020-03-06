@@ -24,7 +24,9 @@ class MainMenu extends Component {
             maxLoanAmount: 0,
             lastVisit: 0,
             properties: [],
-            propertyScreen: false
+            propertyScreen: false,
+            localProperty: {},
+            localPropertyOwned: false
         }
     }
 
@@ -63,6 +65,23 @@ class MainMenu extends Component {
             bankFound = player.banks.length - 1;
         }
 
+        let localPropertyOwned = false;
+        let localProperty = {};
+        player.properties.forEach((property) => {
+            if (property.town === player.location) {
+                localPropertyOwned = true;
+                localProperty = property;
+            }
+        });
+
+        if (!localPropertyOwned) {
+            this.props.properties.forEach((property) => {
+                if (property.town === player.location) {
+                    localProperty = property;
+                }
+            });
+        }
+
         this.props.updatePlayer(player);
 
         this.setState({
@@ -72,7 +91,9 @@ class MainMenu extends Component {
             interestRate: interestRate,
             maxLoanAmount: maxLoanAmount,
             lastVisit: player.day,
-            player: player
+            player: player,
+            localProperty: localProperty,
+            localPropertyOwned: localPropertyOwned
         });
     }
 
