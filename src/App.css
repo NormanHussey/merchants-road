@@ -584,6 +584,10 @@ select:focus {
   margin: 1vmax 0;
 }
 
+.propertyInfo {
+  margin: 1vmax 0;
+}
+
 /* Media queries */
 
 @media (max-width: 800px) {

@@ -270,6 +270,14 @@ class MainMenu extends Component {
 
     }
 
+    purchaseProperty = () => {
+        const player = this.state.player;
+        player.money -= this.state.localProperty.cost;
+        player.properties.push(this.state.localProperty);
+        this.state.localPropertyOwned = true;
+        this.props.updatePlayer(player);
+    }
+
     render() {
         const player = this.state.player;
         let disabled = false;
@@ -279,6 +287,8 @@ class MainMenu extends Component {
             maxWithdraw = 0;
         }
         const interestRateToDisplay = (this.state.interestRate * 100).toFixed(2);
+
+        const property = this.state.localProperty;
 
         return(
             <div>
@@ -408,6 +418,20 @@ class MainMenu extends Component {
                 {
                     this.state.propertyScreen ?
                     <div className="popup propertyScreen">
+                        <h2>{property.name} of {property.town}</h2>
+                        {
+                            this.state.localPropertyOwned ?
+                            <div>
+
+                            </div>
+                            :
+                            <div className="propertyInfo">
+                                { player.money < property.cost ? disabled = true : disabled = false}
+                                <h3>Cost: ${property.cost}</h3>
+                                <h4>Produces {property.production} x {property.item} per day</h4>
+                                <button onClick={ this.purchaseProperty } disabled={disabled}>Purchase</button>
+                            </div>
+                        }
                         <button onClick={ this.togglePropertyScreen }>Close</button>
                     </div>
                     : null
