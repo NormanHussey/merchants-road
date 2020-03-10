@@ -26,7 +26,8 @@ class MainMenu extends Component {
             properties: [],
             propertyScreen: false,
             localProperty: {},
-            localPropertyOwned: false
+            localPropertyOwned: false,
+            collectingScreen: false
         }
     }
 
@@ -71,6 +72,7 @@ class MainMenu extends Component {
             if (property.town === player.location) {
                 localPropertyOwned = true;
                 localProperty = property;
+                // property.qty += (player.day - lastVisit) * property.production;
             }
         });
 
@@ -274,8 +276,20 @@ class MainMenu extends Component {
         const player = this.state.player;
         player.money -= this.state.localProperty.cost;
         player.properties.push(this.state.localProperty);
-        this.state.localPropertyOwned = true;
+        this.setState({
+            localPropertyOwned: true
+        });
         this.props.updatePlayer(player);
+    }
+
+    toggleCollectingScreen = () => {
+        this.setState({
+            collectingScreen: !this.state.collectingScreen
+        });
+    }
+
+    collectItems = (e) => {
+        e.preventDefault();
     }
 
     render() {
@@ -421,8 +435,12 @@ class MainMenu extends Component {
                         <h2>{property.name} of {property.town}</h2>
                         {
                             this.state.localPropertyOwned ?
-                            <div>
-
+                            <div className="propertyInfo">
+                                <div className="darkContainer">
+                                    <h3>Qty: {property.qty}</h3>
+                                </div>
+                                
+                                <button onClick={ this.toggleCollectingScreen }>Collect Items</button>
                             </div>
                             :
                             <div className="propertyInfo">
@@ -433,6 +451,19 @@ class MainMenu extends Component {
                             </div>
                         }
                         <button onClick={ this.togglePropertyScreen }>Close</button>
+                    </div>
+                    : null
+                }
+                {
+                    this.state.collectingScreen ?
+                    <div className="popup withdrawScreen">
+                        <h3>How much to collect?</h3>
+                        <form onSubmit={ this.collectItems } action="submit">
+                            <label htmlFor="collectAmount">Max: ${maxWithdraw}<span className="sr-only">Enter amount to collect</span></label>
+                            <input onChange={ this.moneyInput } type="number" id="collectAmount" min="0" max={maxWithdraw} />
+                            <button type="submit">Collect</button>
+                        </form>
+                        <button onClick={ this.toggleCollectingScreen }>Cancel</button>
                     </div>
                     : null
                 }
