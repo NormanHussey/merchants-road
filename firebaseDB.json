@@ -45,7 +45,9 @@
             "item": "Wheat",
             "production": 10,
             "qty": 0,
-            "cost": 250000
+            "cost": 250000,
+            "lastVisit": 0,
+            "owned": false
         },
         {
             "town": "Canterbury",
@@ -53,7 +55,9 @@
             "item": "Fish",
             "production": 10,
             "qty": 0,
-            "cost": 250000
+            "cost": 250000,
+            "lastVisit": 0,
+            "owned": false
         }
 
     ],

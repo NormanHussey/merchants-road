@@ -27,7 +27,8 @@ class MainMenu extends Component {
             propertyScreen: false,
             localProperty: {},
             localPropertyOwned: false,
-            collectingScreen: false
+            collectingScreen: false,
+            collectAmount: 0
         }
     }
 
@@ -67,21 +68,26 @@ class MainMenu extends Component {
         }
 
         let localPropertyOwned = false;
+        let propertyFound = false;
         let localProperty = {};
         player.properties.forEach((property) => {
             if (property.town === player.location) {
-                localPropertyOwned = true;
+                propertyFound = true;
+                localPropertyOwned = property.owned;
                 localProperty = property;
-                // property.qty += (player.day - lastVisit) * property.production;
+                property.qty += (player.day - property.lastVisit) * property.production;
+                property.lastVisit = player.day;
             }
         });
 
-        if (!localPropertyOwned) {
+        if (!propertyFound) {
             this.props.properties.forEach((property) => {
                 if (property.town === player.location) {
                     localProperty = property;
+                    localProperty.lastVisit = player.day;
                 }
             });
+            player.properties.push(localProperty);
         }
 
         this.props.updatePlayer(player);
@@ -275,7 +281,9 @@ class MainMenu extends Component {
     purchaseProperty = () => {
         const player = this.state.player;
         player.money -= this.state.localProperty.cost;
-        player.properties.push(this.state.localProperty);
+        const propertyCopy = {...this.state.localProperty};
+        propertyCopy.lastVisit = player.day;
+        player.properties.push(propertyCopy);
         this.setState({
             localPropertyOwned: true
         });
@@ -288,8 +296,46 @@ class MainMenu extends Component {
         });
     }
 
+    collectInput = (e) => {
+        this.setState({
+            collectAmount: parseInt(e.target.value)
+        });
+    }
+
     collectItems = (e) => {
         e.preventDefault();
+        const player = this.state.player;
+        const property = {...this.state.localProperty};
+        let itemFound = false;
+        player.inventory.forEach((item)=> {
+            if (item.type === property.item) {
+                itemFound = true;
+                const previousPrice = item.price;
+                const previousQty = item.qty;
+                const currentPrice = 0;
+                const averageWeightedCost = Math.round(((previousPrice * previousQty) + (currentPrice * this.state.collectAmount)) / (previousQty + this.state.collectAmount));
+                item.price = averageWeightedCost;
+                item.qty += this.state.collectAmount;
+            }
+        });
+
+        if (!itemFound) {
+            player.inventory.push({
+                type: property.item,
+                qty: this.state.collectAmount,
+                price: 0,
+              });
+              player.inventorySize += this.state.collectAmount;
+        }
+
+        property.qty -= this.state.collectAmount;
+
+        this.setState({
+            localProperty: property
+        });
+
+        this.props.updatePlayer(player);
+        this.toggleCollectingScreen();
     }
 
     render() {
@@ -303,6 +349,7 @@ class MainMenu extends Component {
         const interestRateToDisplay = (this.state.interestRate * 100).toFixed(2);
 
         const property = this.state.localProperty;
+        const maxCollect = Math.min(property.qty, (player.maxInventory - player.inventorySize));
 
         return(
             <div>
@@ -459,8 +506,8 @@ class MainMenu extends Component {
                     <div className="popup withdrawScreen">
                         <h3>How much to collect?</h3>
                         <form onSubmit={ this.collectItems } action="submit">
-                            <label htmlFor="collectAmount">Max: ${maxWithdraw}<span className="sr-only">Enter amount to collect</span></label>
-                            <input onChange={ this.moneyInput } type="number" id="collectAmount" min="0" max={maxWithdraw} />
+                            <label htmlFor="collectAmount">Max: {maxCollect}<span className="sr-only">Enter amount to collect</span></label>
+                            <input onChange={ this.collectInput } type="number" id="collectAmount" min="0" max={maxCollect} />
                             <button type="submit">Collect</button>
                         </form>
                         <button onClick={ this.toggleCollectingScreen }>Cancel</button>
