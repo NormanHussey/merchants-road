@@ -31,7 +31,8 @@ class MainMenu extends Component {
             collectingScreen: false,
             collectAmount: 0,
             showBankLedger: true,
-            showPropertyLedger: false
+            showPropertyLedger: false,
+            addedInventoryCost: 10000
         }
     }
 
@@ -100,6 +101,8 @@ class MainMenu extends Component {
 
         this.props.updatePlayer(player);
 
+        const addedInventoryCost = (player.maxInventory * 0.1) * 1000;
+
         this.setState({
             properties: properties,
             bankIndex: bankFound,
@@ -110,7 +113,8 @@ class MainMenu extends Component {
             player: player,
             localProperty: localProperty,
             propertyIndex: propertyFound,
-            localPropertyOwned: localPropertyOwned
+            localPropertyOwned: localPropertyOwned,
+            addedInventoryCost: addedInventoryCost
         });
     }
 
@@ -162,8 +166,8 @@ class MainMenu extends Component {
     }
 
     addInventorySlots = () => {
-        const player = this.state.player;
-        player.money -= 10000;
+        const player = {...this.state.player};
+        player.money -= this.state.addedInventoryCost;
         player.maxInventory += 10;
         this.props.updatePlayer(player);
     }
@@ -473,10 +477,10 @@ class MainMenu extends Component {
                             <h3>Your caravan: </h3>
                             <h4>Inventory Slots: {player.maxInventory}</h4>
                             <h4>Armed Guards: {player.armedGuards}</h4>
-                            { player.money < 10000 ? disabled = true : disabled = false}
-                            <button disabled={disabled} onClick={this.addInventorySlots}>Add 10 Inventory Slots ($10,000)</button>
+                            { player.money < this.state.addedInventoryCost ? disabled = true : disabled = false}
+                            <button disabled={disabled} onClick={this.addInventorySlots}>Add 10 Inventory Slots (${this.state.addedInventoryCost})</button>
                             { player.money < 5000 ? disabled = true : disabled = false}
-                            <button onClick={this.hireArmedGuard} disabled={disabled}>Hire an Armed Guard ($5,000 + $25/day)</button>
+                            <button onClick={this.hireArmedGuard} disabled={disabled}>Hire an Armed Guard ($5000 + $25/day)</button>
                             { player.armedGuards < 1 ? disabled = true : disabled = false}
                             <button onClick={this.fireArmedGuard} disabled={disabled}>Fire an Armed Guard</button>
                             <button onClick={ this.toggleUpgradeScreen }>Back to Menu</button>
