@@ -29,7 +29,9 @@ class MainMenu extends Component {
             localPropertyOwned: false,
             propertyIndex: 0,
             collectingScreen: false,
-            collectAmount: 0
+            collectAmount: 0,
+            showBankLedger: true,
+            showPropertyLedger: false
         }
     }
 
@@ -209,6 +211,20 @@ class MainMenu extends Component {
         });
     }
 
+    showBankLedger = () => {
+        this.setState({
+            showBankLedger: true,
+            showPropertyLedger: false
+        });
+    }
+
+    showPropertyLedger = () => {
+        this.setState({
+            showBankLedger: false,
+            showPropertyLedger: true
+        });
+    }
+
     moneyInput = (e) => {
         this.setState({
             moneyAmount: parseInt(e.target.value)
@@ -358,6 +374,12 @@ class MainMenu extends Component {
 
         const property = this.state.localProperty;
         const maxCollect = Math.min(property.qty, (player.maxInventory - player.inventorySize));
+        let ledgerType;
+        if (this.state.showPropertyLedger){
+            ledgerType = 'Property';
+        } else {
+            ledgerType = 'Bank';
+        }
 
         return(
             <div>
@@ -460,27 +482,53 @@ class MainMenu extends Component {
                 }
                 {
                     this.state.ledgerScreen ?
-                    <div className="popup ledgerScreen">
-                        <h3>Ledger</h3>
-                        <div className="ledgerItemList">
+                        <div className="popup ledgerScreen">
+                            <h3>{ledgerType} Ledger</h3>
                             {
-                                player.banks.map((bank, index)=> {
-                                    if (bank.name !== "empty" && bank.balance !== 0) {
-                                        return(
-                                            <div key={bank.name + index} className="ledgerItem">
-                                                <h4>{bank.name}</h4>
-                                                <div className="darkContainer">
-                                                    <h3>${bank.balance}</h3>
-                                                </div>
-                                            </div>
-                                        );
-                                    } else {
-                                        return false;
+                                this.state.showBankLedger ?
+                                <div className="ledgerItemList">
+                                    {
+                                        player.banks.map((bank, index)=> {
+                                            if (bank.name !== "empty" && bank.balance !== 0) {
+                                                return(
+                                                    <div key={bank.name + index} className="ledgerItem">
+                                                        <h4>{bank.name}</h4>
+                                                        <div className="darkContainer">
+                                                            <h3>${bank.balance}</h3>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            } else {
+                                                return false;
+                                            }
+                                        })
                                     }
-                                })
+                                </div>
+                                :
+                                <div className="ledgerItemList">
+                                    {
+                                        player.properties.map((property, index)=> {
+                                            if (property.owned) {
+                                                return(
+                                                    <div key={property.name + index} className="ledgerItem">
+                                                        <h4>{property.name} of {property.town}</h4>
+                                                        <div className="darkContainer">
+                                                            <h3>{property.qty}</h3>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            } else {
+                                                return false;
+                                            }
+                                        })
+                                    }
+                                </div>
                             }
+                        <div className="choices">
+                            <button onClick={ this.showBankLedger }>Banks</button>
+                            <button onClick={ this.showPropertyLedger }>Properties</button>
+                            <button onClick={ this.toggleLedgerScreen }>Close</button>
                         </div>
-                        <button onClick={ this.toggleLedgerScreen }>Close</button>
                     </div>
                     : null
                 }
