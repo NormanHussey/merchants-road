@@ -75,7 +75,9 @@ class MainMenu extends Component {
             if (property.town === player.location) {
                 propertyFound = index;
                 localPropertyOwned = property.owned;
-                property.qty += (player.day - property.lastVisit) * property.production;
+                if (property.owned) {
+                    property.qty += (player.day - property.lastVisit) * property.production;
+                }
                 property.lastVisit = player.day;
                 localProperty = property;
             }
@@ -284,8 +286,6 @@ class MainMenu extends Component {
     purchaseProperty = () => {
         const player = {...this.state.player};
         const property = player.properties[this.state.propertyIndex];
-        console.log(player.properties);
-        console.log(this.state.propertyIndex);
         player.money -= property.cost;
         property.owned = true;
         property.lastVisit = player.day;
@@ -322,6 +322,7 @@ class MainMenu extends Component {
                 const averageWeightedCost = Math.round(((previousPrice * previousQty) + (currentPrice * this.state.collectAmount)) / (previousQty + this.state.collectAmount));
                 item.price = averageWeightedCost;
                 item.qty += this.state.collectAmount;
+                player.inventorySize += this.state.collectAmount;
             }
         });
 
