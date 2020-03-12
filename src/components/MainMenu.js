@@ -560,18 +560,21 @@ class MainMenu extends Component {
                             this.state.localPropertyOwned ?
                             <div className="propertyInfo">
                                 <h4>Produces {property.production} x {property.item} per day</h4>
-                                <div className="darkContainer">
+                                <div className="darkContainer propertyQty">
                                     <h3>Qty: {property.qty}</h3>
                                 </div>
-                                
-                                <button onClick={ this.toggleCollectingScreen }>Collect Items</button>
+                                <div className="choices">
+                                    <button onClick={ this.toggleCollectingScreen }>Collect Items</button>     
+                                </div>
                             </div>
                             :
                             <div className="propertyInfo">
                                 { player.money < property.cost ? disabled = true : disabled = false}
                                 <h3>Cost: ${property.cost}</h3>
                                 <h4>Produces {property.production} x {property.item} per day</h4>
-                                <button onClick={ this.purchaseProperty } disabled={disabled}>Purchase</button>
+                                <div className="choices">
+                                    <button onClick={ this.purchaseProperty } disabled={disabled}>Purchase</button>
+                                </div>
                             </div>
                         }
                         <button onClick={ this.togglePropertyScreen }>Close</button>

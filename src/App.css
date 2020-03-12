@@ -543,7 +543,8 @@ select:focus {
   color: var(--colAccentLight);
 }
 
-.bankBalance {
+.bankBalance,
+.propertyQty {
   margin: 1vmax 0;
   width: 50%;
   display: flex;
@@ -551,8 +552,17 @@ select:focus {
   align-items: center;
 }
 
-.bank .choices {
+.propertyQty {
+  width: inherit;
+}
+
+.bank .choices,
+.propertyInfo .choices {
   margin: 1vmax 0;
+}
+
+.propertyScreen h2 {
+  text-align: center;
 }
 
 .depositScreen form,
@@ -654,6 +664,10 @@ select:focus {
 
   .choices {
     flex-direction: column;
+  }
+
+  .ledgerScreen .choices {
+    flex-direction: row;
   }
 
   .choices button {
