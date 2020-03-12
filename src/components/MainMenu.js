@@ -382,6 +382,8 @@ class MainMenu extends Component {
         } else {
             ledgerType = 'Bank';
         }
+        let banksToShow = false;
+        let propertiesToShow = false;
 
         return(
             <div>
@@ -492,6 +494,7 @@ class MainMenu extends Component {
                                     {
                                         player.banks.map((bank, index)=> {
                                             if (bank.name !== "empty" && bank.balance !== 0) {
+                                                banksToShow = true;
                                                 return(
                                                     <div key={bank.name + index} className="ledgerItem">
                                                         <h4>{bank.name}</h4>
@@ -505,12 +508,18 @@ class MainMenu extends Component {
                                             }
                                         })
                                     }
+                                    {
+                                        !banksToShow ?
+                                        <p>No current investments</p>
+                                        : null
+                                    }
                                 </div>
                                 :
                                 <div className="ledgerItemList">
                                     {
                                         player.properties.map((property, index)=> {
                                             if (property.owned) {
+                                                propertiesToShow = true;
                                                 return(
                                                     <div key={property.name + index} className="ledgerItem">
                                                         <h4>{property.name} of {property.town}</h4>
@@ -523,6 +532,11 @@ class MainMenu extends Component {
                                                 return false;
                                             }
                                         })
+                                    }
+                                    {
+                                        !propertiesToShow ?
+                                        <p>No owned properties</p>
+                                        : null
                                     }
                                 </div>
                             }
@@ -541,6 +555,7 @@ class MainMenu extends Component {
                         {
                             this.state.localPropertyOwned ?
                             <div className="propertyInfo">
+                                <h4>Produces {property.production} x {property.item} per day</h4>
                                 <div className="darkContainer">
                                     <h3>Qty: {property.qty}</h3>
                                 </div>
