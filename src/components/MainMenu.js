@@ -74,14 +74,16 @@ class MainMenu extends Component {
         let propertyFound = false;
         let localProperty = {};
         player.properties.forEach((property, index) => {
-            if (property.town === player.location) {
-                propertyFound = index;
-                localPropertyOwned = property.owned;
+            if (property.town !== "empty") {
                 if (property.owned) {
                     property.qty += (player.day - property.lastVisit) * property.production;
+                    property.lastVisit = player.day;
                 }
-                property.lastVisit = player.day;
-                localProperty = property;
+                if (property.town === player.location) {
+                    propertyFound = index;
+                    localPropertyOwned = property.owned;
+                    localProperty = property;
+                }
             }
         });
 
