@@ -27,13 +27,14 @@ class MainMenu extends Component {
             propertyScreen: false,
             localProperty: {},
             localPropertyOwned: false,
+            propertyIndex: 0,
             collectingScreen: false,
             collectAmount: 0
         }
     }
 
     componentDidMount() {
-        const player = this.props.player;
+        const player = {...this.props.player};
         const properties = this.props.properties;
         let bankFound = false;
         let accountBalance = 0;
@@ -70,13 +71,13 @@ class MainMenu extends Component {
         let localPropertyOwned = false;
         let propertyFound = false;
         let localProperty = {};
-        player.properties.forEach((property) => {
+        player.properties.forEach((property, index) => {
             if (property.town === player.location) {
-                propertyFound = true;
+                propertyFound = index;
                 localPropertyOwned = property.owned;
-                localProperty = property;
                 property.qty += (player.day - property.lastVisit) * property.production;
                 property.lastVisit = player.day;
+                localProperty = property;
             }
         });
 
@@ -88,6 +89,7 @@ class MainMenu extends Component {
                 }
             });
             player.properties.push(localProperty);
+            propertyFound = player.properties.length - 1;
         }
 
         this.props.updatePlayer(player);
@@ -101,6 +103,7 @@ class MainMenu extends Component {
             lastVisit: player.day,
             player: player,
             localProperty: localProperty,
+            propertyIndex: propertyFound,
             localPropertyOwned: localPropertyOwned
         });
     }
@@ -279,15 +282,18 @@ class MainMenu extends Component {
     }
 
     purchaseProperty = () => {
-        const player = this.state.player;
-        player.money -= this.state.localProperty.cost;
-        const propertyCopy = {...this.state.localProperty};
-        propertyCopy.lastVisit = player.day;
-        player.properties.push(propertyCopy);
+        const player = {...this.state.player};
+        const property = player.properties[this.state.propertyIndex];
+        console.log(player.properties);
+        console.log(this.state.propertyIndex);
+        player.money -= property.cost;
+        property.owned = true;
+        property.lastVisit = player.day;
+        this.props.updatePlayer(player);
         this.setState({
+            player: player,
             localPropertyOwned: true
         });
-        this.props.updatePlayer(player);
     }
 
     toggleCollectingScreen = () => {
@@ -304,8 +310,8 @@ class MainMenu extends Component {
 
     collectItems = (e) => {
         e.preventDefault();
-        const player = this.state.player;
-        const property = {...this.state.localProperty};
+        const player = {...this.state.player};
+        const property = player.properties[this.state.propertyIndex];
         let itemFound = false;
         player.inventory.forEach((item)=> {
             if (item.type === property.item) {
@@ -331,6 +337,7 @@ class MainMenu extends Component {
         property.qty -= this.state.collectAmount;
 
         this.setState({
+            player: player,
             localProperty: property
         });
 
