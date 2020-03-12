@@ -58,6 +58,286 @@
             "cost": 250000,
             "lastVisit": 0,
             "owned": false
+        },
+        {
+            "town": "Dinkelsbuhl",
+            "name": "Brewery",
+            "item": "Ale",
+            "production": 10,
+            "qty": 0,
+            "cost": 250000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Lubeck",
+            "name": "Barley Farm",
+            "item": "Barley",
+            "production": 10,
+            "qty": 0,
+            "cost": 250000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Calais",
+            "name": "Salt Refinery",
+            "item": "Salt",
+            "production": 10,
+            "qty": 0,
+            "cost": 250000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Avignon",
+            "name": "Sugar Refinery",
+            "item": "Sugar",
+            "production": 10,
+            "qty": 0,
+            "cost": 250000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Triberg",
+            "name": "Bee Keeper",
+            "item": "Honey",
+            "production": 8,
+            "qty": 0,
+            "cost": 500000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Chester",
+            "name": "Brewery",
+            "item": "Mead",
+            "production": 8,
+            "qty": 0,
+            "cost": 500000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Lyon",
+            "name": "Lumberyard",
+            "item": "Wood",
+            "production": 8,
+            "qty": 0,
+            "cost": 500000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Shrewsbury",
+            "name": "Sheep Farm",
+            "item": "Wool",
+            "production": 8,
+            "qty": 0,
+            "cost": 500000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "La Rochelle",
+            "name": "Orchard",
+            "item": "Fruit",
+            "production": 8,
+            "qty": 0,
+            "cost": 500000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Nuremberg",
+            "name": "Dye Garden",
+            "item": "Dye",
+            "production": 6,
+            "qty": 0,
+            "cost": 1000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Toulouse",
+            "name": "Spice Farm",
+            "item": "Spice",
+            "production": 6,
+            "qty": 0,
+            "cost": 1000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Manchester",
+            "name": "Tannery",
+            "item": "Leather",
+            "production": 6,
+            "qty": 0,
+            "cost": 1000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Bad Mergentheim",
+            "name": "Coal Mine",
+            "item": "Coal",
+            "production": 6,
+            "qty": 0,
+            "cost": 1000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Bordeaux",
+            "name": "Vineyard",
+            "item": "Wine",
+            "production": 4,
+            "qty": 0,
+            "cost": 2000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Worcester",
+            "name": "Hunting Lodge",
+            "item": "Fur",
+            "production": 4,
+            "qty": 0,
+            "cost": 2000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Lindau",
+            "name": "Tin Mine",
+            "item": "Tin",
+            "production": 4,
+            "qty": 0,
+            "cost": 2000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Paris",
+            "name": "Silk Farm",
+            "item": "Silk",
+            "production": 3,
+            "qty": 0,
+            "cost": 5000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Meissen",
+            "name": "Iron Mine",
+            "item": "Iron",
+            "production": 3,
+            "qty": 0,
+            "cost": 5000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Coventry",
+            "name": "Steel Mill",
+            "item": "Steel",
+            "production": 3,
+            "qty": 0,
+            "cost": 7500000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Carcassonne",
+            "name": "Bronze Mine",
+            "item": "Bronze",
+            "production": 2,
+            "qty": 0,
+            "cost": 10000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Oxford",
+            "name": "Silver Mine",
+            "item": "Silver",
+            "production": 2,
+            "qty": 0,
+            "cost": 15000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Rothenburg ob der Tauber",
+            "name": "Gold Mine",
+            "item": "Gold",
+            "production": 2,
+            "qty": 0,
+            "cost": 20000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Cambridge",
+            "name": "Diamond Mine",
+            "item": "Diamond",
+            "production": 1,
+            "qty": 0,
+            "cost": 50000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Colmar",
+            "name": "Sapphire Mine",
+            "item": "Sapphire",
+            "production": 1,
+            "qty": 0,
+            "cost": 75000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "London",
+            "name": "Emerald Mine",
+            "item": "Emerald",
+            "production": 1,
+            "qty": 0,
+            "cost": 100000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Berlin",
+            "name": "Ruby Mine",
+            "item": "Ruby",
+            "production": 1,
+            "qty": 0,
+            "cost": 250000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Hamburg",
+            "name": "Silk Farm",
+            "item": "Farm",
+            "production": 3,
+            "qty": 0,
+            "cost": 5000000,
+            "lastVisit": 0,
+            "owned": false
+        },
+        {
+            "town": "Marseille",
+            "name": "Iron Mine",
+            "item": "Iron",
+            "production": 3,
+            "qty": 0,
+            "cost": 5000000,
+            "lastVisit": 0,
+            "owned": false
         }
 
     ],
