@@ -170,21 +170,30 @@ class MainMenu extends Component {
         player.money -= this.state.addedInventoryCost;
         player.maxInventory += 10;
         this.props.updatePlayer(player);
+        this.setState({
+            player: player
+        });
     }
 
     hireArmedGuard = () => {
-        const player = this.state.player;
+        const player = {...this.state.player};
         player.money -= 5000;
         player.armedGuards++;
         player.travelCost = 25 * (player.armedGuards + 1);
         this.props.updatePlayer(player);
+        this.setState({
+            player: player
+        });
     }
 
     fireArmedGuard = () => {
-        const player = this.state.player;
+        const player = {...this.state.player};
         player.armedGuards--;
         player.travelCost = 25 * (player.armedGuards + 1);
         this.props.updatePlayer(player);
+        this.setState({
+            player: player
+        });
     }
 
     toggleBankScreen = () => {
@@ -239,7 +248,7 @@ class MainMenu extends Component {
 
     depositMoney = (e) => {
         e.preventDefault();
-        const player = this.state.player;
+        const player = {...this.state.player};
         const depositAmount = this.state.moneyAmount;
         const currentBank = player.banks[this.state.bankIndex];
         currentBank.balance += depositAmount;
@@ -269,7 +278,7 @@ class MainMenu extends Component {
 
     withdrawMoney = (e) => {
         e.preventDefault();
-        const player = this.state.player;
+        const player = {...this.state.player};
         const withdrawAmount = this.state.moneyAmount;
         const currentBank = player.banks[this.state.bankIndex];
         currentBank.balance -= withdrawAmount;
