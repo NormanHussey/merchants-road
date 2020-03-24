@@ -169,9 +169,11 @@ class MainMenu extends Component {
         const player = {...this.state.player};
         player.money -= this.state.addedInventoryCost;
         player.maxInventory += 10;
+        const addedInventoryCost = (player.maxInventory * 0.1) * 1000;
         this.props.updatePlayer(player);
         this.setState({
-            player: player
+            player: player,
+            addedInventoryCost: addedInventoryCost
         });
     }
 

@@ -359,6 +359,7 @@ select:focus {
   justify-content: center;
   background-color: var(--colPrimary);
   padding: 2vmax;
+  box-shadow: inset 0px 0px 0.5vmax 0.2vmax black;
 }
 
 .popup form button {
@@ -427,6 +428,7 @@ select:focus {
   border: 8px ridge var(--colAccentDark);
   background-color: var(--colPrimary);
   padding: 1vmax;
+  box-shadow: inset 0px 0px 0.5vmax 0.2vmax black;
 }
 
 .startScreen .ornateContainer {
