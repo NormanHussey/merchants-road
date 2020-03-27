@@ -322,7 +322,7 @@
         {
             "town": "Hamburg",
             "name": "Silk Farm",
-            "item": "Farm",
+            "item": "Silk",
             "production": 3,
             "qty": 0,
             "cost": 5000000,
